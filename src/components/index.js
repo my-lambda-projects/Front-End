@@ -8,7 +8,7 @@ import Form from './SignUp';
 function App () {
   return (
     <div className="App">
-      <h1>Forms with React Hooks</h1>
+      <h1>Potluck Planner Sign Up</h1>
       <Form />
     </div>
 
