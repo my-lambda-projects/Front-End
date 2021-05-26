@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./assets/css/main.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section id="one">
+        <div className="inner">
+          <header className="major">
+            <h1>Hi there - hungry?</h1>
+            <h2>Youre in the right place!</h2>
+          </header>
+        </div>
+      </section>
+      <section id="two">
+
+      </section>
+      <section id="three">
+
+      </section>
+      <footer id="footer">
+        <ul className="copyright">
+          <li>Potluck Planner &copy; Lambda School 2021</li>
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </footer>
     </div>
   );
 }
