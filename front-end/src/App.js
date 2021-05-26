@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import SignUpForm from "./components/SignupForm";
 
 function App() {
+
+
   return (
     <Router>
       <div className="App">
@@ -38,7 +40,6 @@ function App() {
       </div>
 
     </Router>
-
   );
 }
 
