@@ -1,20 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {useHistory} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+
+
+
+
+
+const styling = {
+  marginLeft: 'auto',
+  marginRight: '0',
+  textAlign: 'right',
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '500px',
+};
 
 export default function Home () {
-  const [token, setToken] = useState (localStorage.getItem ('token'));
+  let history = useHistory ();
   return (
-    <div>
-      {token && <section className="Guest" />}
-      {!token &&
-        <div>
-          <h1>Potluck Planner</h1>
-          <h3>
-            <p> Username: Admin </p>
-            <p> Password: 1234</p>
-            {' '}
-          </h3>
-          <p>Please Log In to see more!</p>
-        </div>}
+    <div style={styling}>
+      <NavLink to="https://potluck-planner-landing.netlify.app">Home</NavLink>
+      <NavLink to="./Signup">Signup</NavLink>
+      <span>Already have an Account?<NavLink to="/login">Log In</NavLink></span>
     </div>
   );
 }

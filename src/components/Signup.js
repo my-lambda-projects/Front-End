@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
-import './signup.css';
-const Form = () => {
+import React, { useState } from 'react';
+import '../Styles/signup.css';
+
+
+  const Signup = () => {
   const [formData, setFormData] = useState ({
     firstName: '',
     lastName: '',
-    email: '',
+    userName: '',
     password: '',
   });
   const updateFormData = event =>
@@ -12,7 +14,7 @@ const Form = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
-  const {firstName, lastName, email, password} = formData;
+  const {firstName, lastName, userName, password} = formData;
   return (
     <form>
       <input
@@ -31,12 +33,13 @@ const Form = () => {
         name="lastName"
         required
       />
+      
       <input
-        value={email}
+        value={userName}
         onChange={e => updateFormData (e)}
-        placeholder="Email address"
-        type="email"
-        name="email"
+        placeholder="user Name "
+        type="userName"
+        name="userName"
         required
       />
       <input
@@ -51,4 +54,6 @@ const Form = () => {
     </form>
   );
 };
-export default Form;
+
+export default Signup;
+
