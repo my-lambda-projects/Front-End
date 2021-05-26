@@ -7,7 +7,7 @@ export const axiosWithAuth = () =>{
         headers:{
             authorization: token,
         },
-        baseURL:"/api",
+        baseURL:"https://ft-potluck-planner-5.herokuapp.com/api",
         
     });
 };

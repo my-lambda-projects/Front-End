@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-const Login = (props) => {
+const Login = () => {
  const [credentials, setCredentials] = useState({});
 
   const login = e => {
     e.preventDefault();
-    axiosWithAuth().post('login/endpoint', credentials)
+    axiosWithAuth().post('auth/login', credentials)
       .then(res => {
         localStorage.setItem('token', res.data.token);
-        this.props.history.push('/');
       })
   }
 
@@ -23,19 +22,23 @@ const Login = (props) => {
     return (
       <div>
         <form onSubmit={login}>
-          <input
-            type="text"
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-          />
-          <button>Log in</button>
+            <label htmlFor="username">Username</label>
+            <input
+                type="text"
+                name="username"
+                id="username"
+                value={credentials.username}
+                onChange={handleChange}
+            />
+            <label htmlFor="password">Password</label>
+            <input
+                type="password"
+                name="password"
+                id="password"
+                value={credentials.password}
+                onChange={handleChange}
+            />
+            <button>Log in</button>
         </form>
       </div>
     )
