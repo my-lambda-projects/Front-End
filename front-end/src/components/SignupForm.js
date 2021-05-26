@@ -16,9 +16,10 @@ const SignUpForm = () => {
         [event.target.name]: event.target.value,
     });
 
+    //TODO Address 503 error and Request Method
     const register = e => {
         e.preventDefault();
-        axiosWithAuth().post('auth/login', formData)
+        axiosWithAuth().post('https://ft-potluck-planner-5.herokuapp.com/api/auth/register', formData)
           .then(res => {
             console.log(`New user created as ${formData.username}`);
             push('/')

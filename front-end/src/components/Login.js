@@ -6,7 +6,7 @@ const Login = () => {
 
   const login = e => {
     e.preventDefault();
-    axiosWithAuth().post('auth/login', credentials)
+    axiosWithAuth().post('https://ft-potluck-planner-5.herokuapp.com/api/auth/login', credentials)
       .then(res => {
         localStorage.setItem('token', res.data.token);
       })
