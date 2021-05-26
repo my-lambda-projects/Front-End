@@ -1,7 +1,8 @@
 import "./assets/css/main.css";
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import PrivateRoute from "./utils/PrivateRoute";
+// import PrivateRoute from "./utils/PrivateRoute";
 import Login from "./components/Login";
+import SignUpForm from "./components/SignupForm";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         
           <Route exact path="/">
             <Login />
+          </Route>
+
+          <Route path="/signup">
+            <SignUpForm />
           </Route>
 
         </Switch>
