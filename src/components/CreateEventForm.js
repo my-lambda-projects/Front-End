@@ -1,89 +1,76 @@
-import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
-const FormContainer = styled.div`
-border: 1px solid gray;
-    margin: 0 3rem;
-    width: auto;
-    display: flex; 
-`;
-const Inputs = styled.div`
-margin: 3rem;
-`;
-const Button = styled.button`
-margin: 3rem;
-`;
+const Organizer = props => {
+  const {push} = useHistory ();
+  const [newEvent, setnewEvent] = useState ({
+    date: '',
+    organizer: '',
+    location: '',
+    name: '',
+    time: '',
+  });
 
-const InitialCreateEventForm = {
-  eventName: '',
-  location: '',
-  date: '',
-  time: '',
-  id: Date.now (),
-};
-
-//------------------------------------------------------------
-
-export default function NewCreateEventForm () {
-  const [newCreateEventForm, setNewCreateEventForm] = useState (
-    InitialCreateEventForm
-  );
-  console.log (newCreateEventForm, 'hi');
   const changeHandler = e => {
-    setNewCreateEventForm ({
-      ...newCreateEventForm,
-      [e.target.name]: e.target.value,
-    });
+    e.preventDefault ();
+    setnewEvent ({...newEvent, [e.target.name]: e.target.value});
   };
 
   const submitHandler = e => {
     e.preventDefault ();
-    const newEvent = {
-      eventName: newCreateEventForm.eventName,
-      location: newCreateEventForm.location,
-      date: newCreateEventForm.date,
-      time: newCreateEventForm.time,
-      id: Date.now (),
-    };
-
-    return (
-      <FormContainer>
-        <form onSubmit={submitHandler}>
-          <Inputs>
-            <label>Event Name: </label>
-            <input
-              name="eventName"
-              value={newCreateEventForm.eventName}
-              onChange={changeHandler}
-            />
-          </Inputs>
-          <Inputs>
-            <label>Location: </label>
-            <input
-              name="location"
-              value={newCreateEventForm.location}
-              onChange={changeHandler}
-            />
-          </Inputs>
-          <Inputs>
-            <label>Date: </label>
-            <input
-              name="date"
-              value={newCreateEventForm.date}
-              onChange={changeHandler}
-            />
-          </Inputs>
-          <Inputs>
-            <label>Time: </label>
-            <input
-              name="time"
-              value={newCreateEventForm.time}
-              onChange={changeHandler}
-            />
-          </Inputs>
-          <Button>Submit</Button>
-        </form>
-      </FormContainer>
-    );
+    props.addEvent (newEvent);
+    setnewEvent ({
+      date: '',
+      organizer: '',
+      location: '',
+      name: '',
+      time: '',
+    });
+    push ('/route');
   };
-}
+  return (
+    <div>
+      <h1>Create your Event</h1>
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          name="date"
+          placeholder="date"
+          value={newEvent.date}
+          onChange={changeHandler}
+        />
+        <input
+          type="text"
+          name="organizer"
+          placeholder="organizer"
+          value={newEvent.organizer}
+          onChange={changeHandler}
+        />
+        <input
+          type="text"
+          name="location"
+          placeholder="location"
+          value={newEvent.location}
+          onChange={changeHandler}
+        />
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          value={newEvent.name}
+          onChange={changeHandler}
+        />
+        <input
+          type="text"
+          name="time"
+          placeholder="time"
+          value={newEvent.time}
+          onChange={changeHandler}
+        />
+        <button type="submit">Submit Event</button>
+      </form>
+    </div>
+  );
+};
+
+export default Organizer;
