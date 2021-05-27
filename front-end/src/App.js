@@ -1,9 +1,9 @@
 import './App.css';
 import {  BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute'
+// import Login from './components/Login'
 import Login from './components/Login'
-import Registration from './components/Registration'
-import Invite from './components/Invite'
+import EventsList from './components/EventsList'
 
 function App() {
 
@@ -15,9 +15,9 @@ function App() {
     </div>
     <Router>
     <Switch>
-      <PrivateRoute exact path="/protected" component={Invite}/>
+      <Route exact path="/events" component={EventsList}/>
       <Route path="/login" component={Login} />
-      <Route path="/Registration" component={Registration} />
+      {/* <Route path="/Registration" component={Form} /> */}
     </Switch>
     </Router>
     </>

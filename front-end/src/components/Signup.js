@@ -1,18 +1,35 @@
 import React, {useState} from 'react';
-import './signup.css';
-const Form = () => {
+import  '../Styles/signup.css'
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/userAction';
+import { useHistory } from 'react-router';
+
+const Form = (props) => {
   const [formData, setFormData] = useState ({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
   });
+  const { push } = useHistory();
+  const { isLoggedIn } = props;
+
   const updateFormData = event =>
     setFormData ({
       ...formData,
       [event.target.name]: event.target.value,
     });
   const {firstName, lastName, email, password} = formData;
+
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    const loginCreds = {
+      username: formData.username.trim(),
+      password: formData.password.trim(),
+    };
+    props.loginUser(loginCreds);
+  };
+
   return (
     <form>
       <input
@@ -51,4 +68,12 @@ const Form = () => {
     </form>
   );
 };
-export default Form;
+// const mapStateToProps = (state) => {
+//   return {
+//     username: state.userReducer.username,
+//     password: state.userReducer.password,
+//     isLoggedIn: state.userReducer.isLoggedIn,
+//   };
+// };
+// export default connect(mapStateToProps, { loginUser })(Form);
+export default (Form);
