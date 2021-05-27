@@ -4,5 +4,5 @@ import { eventReducer } from "./eventReducer";
 
 export const rootReducer = combineReducers({
   userReducer: userReducer,
-  recipeReducer: eventReducer,
+  eventReducer: eventReducer,
 });

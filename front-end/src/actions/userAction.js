@@ -29,6 +29,7 @@ export const loginUser = (loginCreds) => (dispatch) => {
     .then((res) => {
       window.localStorage.setItem('token', res.data.token);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      // window.location.pathname = "/events";
     })
     .catch((err) => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });

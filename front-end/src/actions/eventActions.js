@@ -23,7 +23,7 @@ export const EDIT_EVENT_FAILURE = 'EDIT_EVENT_FAILURE';
 export const getOrganizerEvents = (user_id) => (dispatch) => {
   dispatch({ type: GET_EVENTS_LOADING });
   axiosWithAuth()
-    .get(`api/events/${user_id}`)
+    .get(`api/events/organizer/${user_id}`)
     .then((res) => dispatch({ type: GET_EVENTS_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch({
@@ -32,6 +32,22 @@ export const getOrganizerEvents = (user_id) => (dispatch) => {
       });
     });
 };
+
+// export const getOrganizerEvents = (user_id) => (dispatch) => {
+//   dispatch({ type: GET_EVENTS_LOADING });
+//   axiosWithAuth()
+//     .get(`api/events/organizer/${user_id}`)
+//    // /api/events/organizer/:user_id
+//     .then((res) => {
+//       dispatch({ type: GET_EVENTS_SUCCESS, payload: res.data })
+//     })
+//     .catch((err) => {
+//       dispatch({
+//         type: GET_EVENTS_FAILURE,
+//         payload: err.response.data.message,
+//       });
+//     });
+// };
 
 // //sree
 // export const getOrganizerEvents = (user_id) => (dispatch) => {
@@ -57,6 +73,7 @@ export const getEventId = (eventId) => (dispatch) => {
   dispatch({ type: GET_EVENT_BY_ID_LOADING });
   axiosWithAuth()
     .get(`api/events/${eventId}`)
+    ///api/events/:event_id
     .then((res) => {
       console.log(res);
       dispatch({ type: GET_EVENT_BY_ID_SUCCESS, payload: res.data });
