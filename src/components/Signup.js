@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../Styles/signup.css';
 import * as yup from 'yup';
 
-
-
-  const Signup = () => {
+const Signup = () => {
   const [formData, setFormData] = useState ({
     firstName: '',
     lastName: '',
@@ -35,7 +33,7 @@ import * as yup from 'yup';
         name="lastName"
         required
       />
-      
+
       <input
         value={userName}
         onChange={e => updateFormData (e)}
@@ -58,4 +56,3 @@ import * as yup from 'yup';
 };
 
 export default Signup;
-
