@@ -68,9 +68,10 @@ export const eventReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case DELETE_EVENT_SUCCESS:
+      console.log("Delete event:",state,action.payload)
       return {
         ...state,
-        isLoading: false,
+        // isLoading: false,
         allOrganizerEvents: state.allOrganizerEvents.filter((event) => {
           return event.event_id !== action.payload.event_id;
         }),

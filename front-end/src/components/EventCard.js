@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { addEvent, editEvent, deleteEvent } from "../actions/eventActions";
+import { deleteEvent } from "../actions/eventActions";
 const EventCard = (props) => {
   const { event } = props;
   const { push } = useHistory();
@@ -17,10 +17,10 @@ const EventCard = (props) => {
    //push("/events");
    
   };
-  const deleteEvent = () => {
-    //console.log("Delete_event-id:",event.event_id)
+  const deleteCurrentEvent = () => {
+    console.log("Delete_props",props);
     props.deleteEvent(event.event_id);
-    push("/events");
+    //  push("/events");
   };
   return (
     <div className="EventCard">
@@ -61,7 +61,7 @@ const EventCard = (props) => {
           <button className="btn_Edit" onClick={editEvent}>
             Edit Event
           </button>
-          <button className="btn_Delete" onClick={deleteEvent}>
+          <button className="btn_Delete" onClick={deleteCurrentEvent}>
             Delete Event
           </button>
         </div>
@@ -71,7 +71,7 @@ const EventCard = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    user_id: state.userReducer.user_id,
+    allOrganizerEvents: state.eventReducer.allOrganizerEvents,
   };
 };
 export default connect(mapStateToProps, { deleteEvent })(

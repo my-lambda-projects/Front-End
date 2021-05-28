@@ -47,7 +47,7 @@ export const AddEvent=(props)=>{
             <>
             
             <h3>Add a New Event</h3>
-            <form onSubmit>
+            <form onSubmit={onSubmit}>
                 <label htmlFor="event">Event Name:
                 <input name='event_name' type='text' value ={event.event_name} onChange={handleChange} placeholder="Enter name here"/>
                 </label>
@@ -63,7 +63,7 @@ export const AddEvent=(props)=>{
                 <label htmlFor="Location">Location:
                 <input name='event_location' type='text' value={event.event_location} onChange={handleChange} placeholder="Enter location here"/>
                 </label>
-                <button className="btn" onClick={onSubmit}>Save</button>
+                <button className="btn" >Save</button>
             </form>
             </>
 

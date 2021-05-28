@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { editEvent } from "../actions/eventActions";
 import { useHistory, useParams } from "react-router";
-import getEventId from "../actions/eventActions";
+import {getEventId} from "../actions/eventActions";
 
 
-const FormValues = {
-  event_name: "",
-  event_date: "",
-  event_time: "",
-  event_location: "",
-  user_id: "",
-};
+// const FormValues = {
+//   event_name: "",
+//   event_date: "",
+//   event_time: "",
+//   event_location: "",
+//   user_id: "",
+// };
 
 const eventObj = {
   event_name: "",
@@ -23,22 +23,20 @@ const eventObj = {
 
 const EditEvent = (props) => {
   const [event, setEvent] = useState(eventObj);
-  const [formValues, setFormValues] = useState(FormValues);
-  const { eventId } = useParams();
-  const { getEventId } = props;
+  // const [formValues, setFormValues] = useState(FormValues);
+  const params = useParams();
+  const { getEventId, singleEvent } = props;
 
   const { push } = useHistory();
-
+ console.log("Single-event:",singleEvent);
   useEffect(() => {
-    getEventId(eventId);
-    setFormvalues();
-  }, [getEventId, eventId]);
+     getEventId(params.eventId);
+    // console.log("Single-event:",singleEvent);
+    //console.log("edit-props:", props)
+     setEvent(singleEvent);
+  },[getEventId, params.eventId]);
 
 
-  const setFormvalues =()=>{
-    FormValues.event_name = props.event_name;
-    console.log("Edit_event_name:",FormValues.event_name);
-  }
 
   const handleChange = (e) => {
     setEvent({
@@ -64,7 +62,7 @@ const EditEvent = (props) => {
   return (
     <>
       <h3>Edit Event</h3>
-      <form onSubmit>
+      <form onSubmit={onSubmit}>
         <label htmlFor="event">
           Event Name:
           <input
@@ -108,7 +106,7 @@ const EditEvent = (props) => {
             placeholder="Enter location here"
           />
         </label>
-        <button className="btn" onClick={onSubmit}>
+        <button className="btn" >
           Save Changes
         </button>
       </form>
@@ -118,6 +116,7 @@ const EditEvent = (props) => {
 const mapStateToProps = (state) => {
   return {
     allOrganizerEvents: state.eventReducer.allOrganizerEvents,
+    singleEvent:state.eventReducer.singleEvent,
   };
 };
 

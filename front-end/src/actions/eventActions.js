@@ -36,6 +36,25 @@ export const getOrganizerEvents = (user_id) => (dispatch) => {
     });
 };
 
+// export const getEventId = (eventId) => (dispatch) => {
+//   console.log('test');
+//   dispatch({ type: GET_EVENT_BY_ID_LOADING });
+//   axiosWithAuth()
+//     .get(`api/events/${eventId}`)
+//     ///api/events/:event_id
+//     .then((res) => {
+//       // debugger
+//       // console.log("Single-event:",res);
+//       dispatch({ type: GET_EVENT_BY_ID_SUCCESS, payload: res.data });
+//     })
+//     .catch((err) => {
+//       dispatch({
+//         type: GET_EVENT_BY_ID_FAILURE,
+//         payload: err,
+//       });
+//     });
+// };
+
 export const getEventId = (eventId) => (dispatch) => {
   console.log('test');
   dispatch({ type: GET_EVENT_BY_ID_LOADING });
@@ -43,7 +62,8 @@ export const getEventId = (eventId) => (dispatch) => {
     .get(`api/events/${eventId}`)
     ///api/events/:event_id
     .then((res) => {
-      console.log(res);
+      // debugger
+      // console.log("Single-event:",res);
       dispatch({ type: GET_EVENT_BY_ID_SUCCESS, payload: res.data });
     })
     .catch((err) => {
