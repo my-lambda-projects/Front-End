@@ -17,15 +17,17 @@ const Login = (props) => {
     });
 
   const { username, password } = formData;
-  
+  const {loginUser} = props;
+
   const onSubmit = (evt) => {
     evt.preventDefault();
     const loginCreds = {
       username: formData.username.trim(),
       password: formData.password.trim(),
     };
-    props.loginUser(loginCreds);
-    push("/events");
+    loginUser(loginCreds)
+    push("/events")
+    
   };
   return (
     <form>
@@ -51,6 +53,9 @@ const Login = (props) => {
     </form>
   );
 };
+
+
+
 export default connect(null, { loginUser })(Login);
 
 

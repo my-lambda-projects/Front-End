@@ -28,6 +28,7 @@ export const loginUser = (loginCreds) => (dispatch) => {
     .post('https://ft-potluck-planner-5.herokuapp.com/api/auth/login', loginCreds)
     .then((res) => {
       window.localStorage.setItem('token', res.data.token);
+      window.localStorage.setItem('user_id', res.data.user_id);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       // window.location.pathname = "/events";
     })

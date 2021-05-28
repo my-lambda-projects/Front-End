@@ -33,41 +33,6 @@ export const getOrganizerEvents = (user_id) => (dispatch) => {
     });
 };
 
-// export const getOrganizerEvents = (user_id) => (dispatch) => {
-//   dispatch({ type: GET_EVENTS_LOADING });
-//   axiosWithAuth()
-//     .get(`api/events/organizer/${user_id}`)
-//    // /api/events/organizer/:user_id
-//     .then((res) => {
-//       dispatch({ type: GET_EVENTS_SUCCESS, payload: res.data })
-//     })
-//     .catch((err) => {
-//       dispatch({
-//         type: GET_EVENTS_FAILURE,
-//         payload: err.response.data.message,
-//       });
-//     });
-// };
-
-// //sree
-// export const getOrganizerEvents = (user_id) => (dispatch) => {
-//   dispatch({ type: GET_EVENTS_LOADING });
-//   axiosWithAuth()
-//     .get(`api/events/${user_id}`)
-//     .then((res) => {
-//       console.log("getEvents-Actions:",res.data);
-//     dispatch({ type: GET_EVENTS_SUCCESS, payload: res.data });
-//     })
-
-//     .catch((err) => {
-//       dispatch({
-//         type: GET_EVENTS_FAILURE,
-//         payload: err.response.data.message,
-//       });
-//     });
-// };
-// //sree
-
 export const getEventId = (eventId) => (dispatch) => {
   console.log('test');
   dispatch({ type: GET_EVENT_BY_ID_LOADING });
@@ -103,6 +68,7 @@ export const deleteEvent = (event_id) => (dispatch) => {
   dispatch({ type: DELETE_EVENT_LOADING });
   axiosWithAuth()
     .delete(`api/events/${event_id}`)
+    ///api/events/:event_id
     .then((res) => dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch({

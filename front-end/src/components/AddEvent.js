@@ -1,44 +1,45 @@
 import React,{useState} from 'react';
 import { connect } from 'react-redux';
 import { addEvent } from '../actions/eventActions';
+import { useHistory } from "react-router";
 
 
-const initialFormValues = {
-    event_name:"",
-    date:"",
-    time:"",
-    location:"",
-  };
+
   const eventObj = {
     event_name:"",
-    date:"",
-    time:"",
-    location:"",
+    event_date:"",
+    event_time:"",
+    event_location:"",
+    owner_id: "",
   };
 
 
 export const AddEvent=(props)=>{
 
-    const [formValues, setFormValues] = useState(initialFormValues);
     const [event, setEvent] = useState(eventObj);
 
+    const { push } = useHistory();
     const handleChange = (e)=>{
         setEvent({
             ...event, [e.target.name]: e.target.value
         });
-
+        console.log("Hanndle_change:",event);
     }
 
     const onSubmit = (evt) => {
         evt.preventDefault();
         const newEvent = {
-          event_name: formValues.event_name.trim(),
-          date: formValues.date.trim(),
-          time: formValues.time.trim(),
-         location: formValues.location.trim(),
+          event_name: event.event_name.trim(),
+          event_date: event.event_date.trim(),
+          event_time: event.event_time.trim(),
+         event_location: event.event_location.trim(),
+         owner_id:window.localStorage.getItem("user_id"),
+         
         };
+        console.log("NewEvent",newEvent);
         props.addEvent(newEvent);
-        setFormValues(initialFormValues);
+        setEvent(eventObj);
+        push("/events");
 
       };
 
@@ -52,15 +53,15 @@ export const AddEvent=(props)=>{
                 </label>
 
                 <label htmlFor="date">Date:
-                <input name='date' type='text' value={event.event_date} onChange={handleChange} placeholder="Enter date here"/>
+                <input name='event_date' type='text' value={event.event_date} onChange={handleChange} placeholder="Enter date here"/>
                 </label>
 
                 <label htmlFor="time">Time:
-                <input name='time' type='text' value={event.event_time} onChange={handleChange} placeholder="Enter time here"/>
+                <input name='event_time' type='text' value={event.event_time} onChange={handleChange} placeholder="Enter time here"/>
                 </label>
 
                 <label htmlFor="Location">Location:
-                <input name='location' type='text' value={event.event_location} onChange={handleChange} placeholder="Enter location here"/>
+                <input name='event_location' type='text' value={event.event_location} onChange={handleChange} placeholder="Enter location here"/>
                 </label>
                 <button className="btn" onClick={onSubmit}>Save</button>
             </form>
