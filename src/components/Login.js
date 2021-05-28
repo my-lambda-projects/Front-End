@@ -1,47 +1,77 @@
-import React, {useState} from 'react';
-const Form = () => {
-  const [formData, setFormData] = useState ({
-    userName: '',
-    password: '',
+import React, { useState } from "react";
+import "../Styles/signup.css";
+import { connect } from "react-redux";
+import { loginUser } from "../actions/userAction";
+import { useHistory } from "react-router";
+const Login = (props) => {
+  const [formData, setFormData] = useState({
+    username: "Admin",
+    password: "1234",
   });
-  const updateFormData = event =>
-    setFormData ({
+  const { push } = useHistory();
+
+  const updateFormData = (event) =>
+    setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
-  const {userName, password} = formData;
 
-  const onSubmit = evt => {
-    evt.preventDefault ();
-    // console.log("FormData:",formData);
+  const { username, password } = formData;
+  const {loginUser} = props;
+
+  const onSubmit = (evt) => {
+    evt.preventDefault();
     const loginCreds = {
-      username: formData.username.trim (),
-      password: formData.password.trim (),
+      username: formData.username.trim(),
+      password: formData.password.trim(),
     };
-    // console.log("LoginCreds:",loginCreds);
-    // props.loginUser (loginCreds);
+    loginUser(loginCreds)
+    push("/events")
+    
   };
-
   return (
     <form>
       <input
-        value={userName}
-        onChange={e => updateFormData (e)}
-        placeholder="User Name"
+        value={username}
+        onChange={(e) => updateFormData(e)}
+        placeholder="User name"
         type="text"
-        name="userName"
+        name="username"
         required
       />
       <input
         value={password}
-        onChange={e => updateFormData (e)}
+        onChange={(e) => updateFormData(e)}
         placeholder="Password"
         type="password"
         name="password"
         required
       />
-      <button onClick={onSubmit} type="submit">Submit</button>
+      <button onClick={onSubmit} type="submit">
+        Submit
+      </button>
     </form>
   );
 };
-export default Form;
+
+
+
+export default connect(null, { loginUser })(Login);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

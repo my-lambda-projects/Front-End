@@ -1,20 +1,35 @@
 import React, {useState} from 'react';
-import '../Styles/signup.css';
-import * as yup from 'yup';
+import  '../Styles/signup.css'
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/userAction';
+import { useHistory } from 'react-router';
 
-const Signup = () => {
+const Form = (props) => {
   const [formData, setFormData] = useState ({
     firstName: '',
     lastName: '',
-    userName: '',
+    email: '',
     password: '',
   });
+  const { push } = useHistory();
+  const { isLoggedIn } = props;
+
   const updateFormData = event =>
     setFormData ({
       ...formData,
       [event.target.name]: event.target.value,
     });
-  const {firstName, lastName, userName, password} = formData;
+  const {firstName, lastName, email, password} = formData;
+
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    const loginCreds = {
+      username: formData.username.trim(),
+      password: formData.password.trim(),
+    };
+    props.loginUser(loginCreds);
+  };
+
   return (
     <form>
       <input
@@ -33,13 +48,12 @@ const Signup = () => {
         name="lastName"
         required
       />
-
       <input
-        value={userName}
+        value={email}
         onChange={e => updateFormData (e)}
-        placeholder="user Name "
-        type="userName"
-        name="userName"
+        placeholder="Email address"
+        type="email"
+        name="email"
         required
       />
       <input
@@ -54,5 +68,12 @@ const Signup = () => {
     </form>
   );
 };
-
-export default Signup;
+// const mapStateToProps = (state) => {
+//   return {
+//     username: state.userReducer.username,
+//     password: state.userReducer.password,
+//     isLoggedIn: state.userReducer.isLoggedIn,
+//   };
+// };
+// export default connect(mapStateToProps, { loginUser })(Form);
+export default (Form);
