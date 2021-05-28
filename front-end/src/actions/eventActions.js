@@ -26,10 +26,13 @@ export const getOrganizerEvents = (user_id) => (dispatch) => {
     .get(`api/events/organizer/${user_id}`)
     .then((res) => dispatch({ type: GET_EVENTS_SUCCESS, payload: res.data }))
     .catch((err) => {
+      console.log("Error from Action:", err);
       dispatch({
         type: GET_EVENTS_FAILURE,
-        payload: err.response.data.message,
+        // payload: err.response.data.message,
+        payload: err,
       });
+      
     });
 };
 
@@ -46,7 +49,7 @@ export const getEventId = (eventId) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: GET_EVENT_BY_ID_FAILURE,
-        payload: err.response,
+        payload: err,
       });
     });
 };
@@ -60,7 +63,7 @@ export const addEvent = (newEvent) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: ADD_EVENT_FAILURE,
-        payload: err.response,
+        payload: err,
       });
     });
 };
@@ -73,12 +76,12 @@ export const deleteEvent = (event_id) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: DELETE_EVENT_FAILURE,
-        payload: err.response,
+        payload: err,
       });
     });
 };
 export const editEvent = (event_id, editedEvent) => (dispatch) => {
-  console.log(event_id);
+  //console.log(event_id);
   dispatch({ type: EDIT_EVENT_LOADING });
   axiosWithAuth()
     .put(`api/events/${event_id}`, editedEvent)
@@ -86,7 +89,7 @@ export const editEvent = (event_id, editedEvent) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: EDIT_EVENT_FAILURE,
-        payload: err.response,
+        payload: err,
       });
     });
 };

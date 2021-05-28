@@ -71,7 +71,7 @@ export const eventReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        allEvents: state.allEvents.filter((event) => {
+        allOrganizerEvents: state.allOrganizerEvents.filter((event) => {
           return event.event_id !== action.payload.event_id;
         }),
       };
@@ -107,7 +107,7 @@ export const eventReducer = (state = initialState, action) => {
     case GET_EVENT_BY_ID_SUCCESS:
       return {
         ...state,
-        singleRecipes: action.payload,
+        singleEvent: action.payload,
         isLoading: false,
       };
     case GET_EVENT_BY_ID_FAILURE:

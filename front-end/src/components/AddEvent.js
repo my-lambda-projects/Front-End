@@ -23,7 +23,7 @@ export const AddEvent=(props)=>{
         setEvent({
             ...event, [e.target.name]: e.target.value
         });
-        console.log("Hanndle_change:",event);
+        // console.log("Hanndle_change:",event);
     }
 
     const onSubmit = (evt) => {
@@ -36,7 +36,7 @@ export const AddEvent=(props)=>{
          owner_id:window.localStorage.getItem("user_id"),
          
         };
-        console.log("NewEvent",newEvent);
+        // console.log("NewEvent",newEvent);
         props.addEvent(newEvent);
         setEvent(eventObj);
         push("/events");
@@ -46,7 +46,7 @@ export const AddEvent=(props)=>{
     return(
             <>
             
-            <h3>Add New Event</h3>
+            <h3>Add a New Event</h3>
             <form onSubmit>
                 <label htmlFor="event">Event Name:
                 <input name='event_name' type='text' value ={event.event_name} onChange={handleChange} placeholder="Enter name here"/>

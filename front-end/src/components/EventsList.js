@@ -8,21 +8,27 @@ import { useHistory } from "react-router";
 const EventsList = (props) => {
     
   const { getOrganizerEvents } = props;
-  console.log("props:",props.user_id);
+  // console.log("props:",props.user_id);
 
 
   useEffect(() => {
-    console.log("All Events:", props);
+    // console.log("All Events:", props);
     const userid = window.localStorage.getItem("user_id");
-    debugger
+    const token = window.localStorage.getItem("token");
+    if(userid && token){
      getOrganizerEvents(userid);
-  }, []);
+    }
+    else{
+      return;
+    }
+  }, [getOrganizerEvents]);
 
   return (
     <div>
       <h1>EventList</h1>
       <div>
-        {props.allOrganizerEvents.map((event) => (
+        {/* {console.log("allOganizer_data:",props.allOrganizerEvents)} */}
+        {props.allOrganizerEvents.length > 0 && props.allOrganizerEvents.map((event) => (
           <EventCard key={event.event_id} event={event} />
         ))}
       </div>
@@ -31,7 +37,7 @@ const EventsList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log("State:",state);
+    // console.log("State:",state);
   return {
     user_id: state.userReducer.user_id,
     allOrganizerEvents: state.eventReducer.allOrganizerEvents,

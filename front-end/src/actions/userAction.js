@@ -17,7 +17,7 @@ export const registerUser = (regCreds) => (dispatch) => {
     .post('https://ft-potluck-planner-5.herokuapp.com/api/auth/register', regCreds)
     .then((res) => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
     .catch((err) => {
-      dispatch({ type: REGISTER_FAILURE, payload: err.response.data.message });
+      dispatch({ type: REGISTER_FAILURE, payload: err });
     });
 };
 
@@ -33,7 +33,7 @@ export const loginUser = (loginCreds) => (dispatch) => {
       // window.location.pathname = "/events";
     })
     .catch((err) => {
-      dispatch({ type: LOGIN_FAILURE, payload: err.response.data.message });
+      dispatch({ type: LOGIN_FAILURE, payload: err });
     });
 };
 

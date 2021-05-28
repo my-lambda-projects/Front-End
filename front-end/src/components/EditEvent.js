@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addEvent } from "../actions/eventActions";
+import { editEvent } from "../actions/eventActions";
 import { useHistory, useParams } from "react-router";
 import getEventId from "../actions/eventActions";
-import { useHistory } from "react-router";
+
+
+const FormValues = {
+  event_name: "",
+  event_date: "",
+  event_time: "",
+  event_location: "",
+  user_id: "",
+};
 
 const eventObj = {
   event_name: "",
@@ -15,6 +23,7 @@ const eventObj = {
 
 const EditEvent = (props) => {
   const [event, setEvent] = useState(eventObj);
+  const [formValues, setFormValues] = useState(FormValues);
   const { eventId } = useParams();
   const { getEventId } = props;
 
@@ -22,7 +31,14 @@ const EditEvent = (props) => {
 
   useEffect(() => {
     getEventId(eventId);
+    setFormvalues();
   }, [getEventId, eventId]);
+
+
+  const setFormvalues =()=>{
+    FormValues.event_name = props.event_name;
+    console.log("Edit_event_name:",FormValues.event_name);
+  }
 
   const handleChange = (e) => {
     setEvent({
@@ -33,16 +49,15 @@ const EditEvent = (props) => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    const newEvent = {
+    const editedEvent = {
       event_name: event.event_name.trim(),
       event_date: event.event_date.trim(),
       event_time: event.event_time.trim(),
       event_location: event.event_location.trim(),
       user_id: window.localStorage.getItem("user_id"),
     };
-    console.log("NewEvent", newEvent);
-    props.addEvent(newEvent);
-    setEvent(eventObj);
+    console.log("editedEvent", editedEvent);
+    props.editEvent(event.eventId, editedEvent);
     push("/events");
   };
 
@@ -94,7 +109,7 @@ const EditEvent = (props) => {
           />
         </label>
         <button className="btn" onClick={onSubmit}>
-          Save
+          Save Changes
         </button>
       </form>
     </>
@@ -106,5 +121,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getEventId, addEvent })(EditEvent);
+export default connect(mapStateToProps, { getEventId, editEvent })(EditEvent);
 //export default AddEvent;
